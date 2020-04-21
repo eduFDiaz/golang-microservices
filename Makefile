@@ -1,5 +1,5 @@
 test:
-    echo "Testing..."
+	echo "Testing..."
 	go test -coverprofile cp.out ./mvc/...
 	go tool cover -html=cp.out
 build:

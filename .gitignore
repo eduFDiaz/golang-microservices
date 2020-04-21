@@ -15,7 +15,4 @@
 # vendor/
 .vscode
 .DS_Store
-<<<<<<< HEAD
-=======
 bin/
->>>>>>> 1ba61031cca2e2fb612073f6b35a04fa4d9e3cae
