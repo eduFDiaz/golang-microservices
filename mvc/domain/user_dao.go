@@ -16,10 +16,18 @@ var (
 			Email:     "fenandez9000@gmail.com",
 		},
 	}
+
+	UserDao userDaoInterface
 )
 
+type userDao struct{}
+
+type userDaoInterface interface {
+	GetUser(userID int64) (*User, *utils.ApplicationError)
+}
+
 // GetUser from data layer
-func GetUser(userID int64) (*User, *utils.ApplicationError) {
+func (u *userDao) GetUser(userID int64) (*User, *utils.ApplicationError) {
 	user := users[userID]
 
 	if user == nil {

@@ -31,7 +31,7 @@ func GetUser(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	user, err := services.GetUser(userID)
+	user, err := services.UserService.GetUser(userID)
 	if err != nil {
 		log.Printf("error = %v", error)
 

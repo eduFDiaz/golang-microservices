@@ -9,6 +9,43 @@ import (
 	"github.com/golang-microservices/mvc/utils"
 )
 
+var (
+	UserDaoMock     userDaoMock
+	getUserFunction func(userID int64) (*User, *utils.ApplicationError)
+)
+
+type userDaoMock struct{}
+
+func (m *userDaoMock) GetUser(userID int64) (*User, *utils.ApplicationError) {
+	return m.GetUserFunction(userID)
+}
+
+func init() {
+	UserDao = &userDaoMock{}
+}
+
+func (m *userDaoMock) GetUserFunction(userID int64) (*User, *utils.ApplicationError) {
+	fmt.Println("inside mock function")
+	switch userID {
+	// user found test
+	case 1:
+		return &User{
+			ID:        1,
+			FirstName: "Eduardo",
+			LastName:  "Fernandez",
+			Email:     "fenandez9000@gmail.com",
+		}, nil
+	// user not found test
+	case 123:
+		return nil, &utils.ApplicationError{
+			Message:    fmt.Sprintf("User with id = %v not found", userID),
+			StatusCode: http.StatusNotFound,
+			Code:       "not found",
+		}
+	}
+	return nil, nil
+}
+
 func TestGetUser(t *testing.T) {
 	type args struct {
 		userID int64
@@ -43,7 +80,7 @@ func TestGetUser(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, got1 := GetUser(tt.args.userID)
+			got, got1 := UserDao.GetUser(tt.args.userID)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetUser() got = %v, want %v", got, tt.want)
 			}
@@ -88,7 +125,7 @@ func BenchmarkGetUser(b *testing.B) {
 	}
 	for _, tt := range tests {
 		b.Run(tt.name, func(b *testing.B) {
-			got, got1 := GetUser(tt.args.userID)
+			got, got1 := UserDao.GetUser(tt.args.userID)
 			if !reflect.DeepEqual(got, tt.want) {
 				b.Errorf("GetUser() got = %v, want %v", got, tt.want)
 			}
