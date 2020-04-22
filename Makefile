@@ -12,5 +12,6 @@ build:
 	go build -o bin/$(executableName) mvc/main.go
 run:
 	echo "Running..."
+	chmod 777 bin/$(executableName)
 	./bin/$(executableName) &
 all: test build run
