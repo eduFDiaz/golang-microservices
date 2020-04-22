@@ -9,7 +9,7 @@ import (
 func StartApplication() {
 	http.HandleFunc("/users", controllers.GetUser)
 
-	if error := http.ListenAndServe("localhost:8080", nil); error != nil {
+	if error := http.ListenAndServe("localhost:9191", nil); error != nil {
 		panic(error)
 	}
 }
