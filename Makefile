@@ -12,6 +12,5 @@ build:
 	go build -o bin/$(executableName) mvc/main.go
 run:
 	echo "Running..."
-	ps | grep $(executableName) | awk '{print $1}' | xargs kill -9 || true
-	nohup ./bin/$(executableName) &
+	./bin/$(executableName) &
 all: test build run
