@@ -4,20 +4,17 @@ pipeline {
    stages {
       stage('test') {
          steps {
-            sh -c '''echo 'Hello test'
-                     make test'''
+            sh -c 'make test'
          }
       }
       stage('build') {
          steps {
-            echo 'Hello build'
-            make build
+            sh -c 'make build'
          }
       }
       stage('run') {
          steps {
-            echo 'Hello run'
-            make run
+            sh -c 'make run'
          }
       }
       stage('deploy') {
