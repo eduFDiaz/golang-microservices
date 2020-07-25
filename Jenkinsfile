@@ -10,8 +10,8 @@ pipeline {
       }
       stage('test') {
          steps {
-            echo 'Hello test'
-            make test
+            sh -c '''echo 'Hello test'
+                     make test'''
          }
       }
       stage('build') {
