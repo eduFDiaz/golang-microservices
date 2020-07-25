@@ -4,7 +4,7 @@ pipeline {
    stages {
       stage('git') {
          steps {
-            echo 'Hello git'
+            sh -c '''echo 'Hello git'''
          }
       }
       stage('test') {
