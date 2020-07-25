@@ -2,11 +2,6 @@ pipeline {
    agent any
 
    stages {
-      stage('git') {
-         steps {
-            sh -c '''echo 'Hello git'''
-         }
-      }
       stage('test') {
          steps {
             sh -c '''echo 'Hello test'
